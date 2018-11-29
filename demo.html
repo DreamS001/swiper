@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>动画测试</title>
+	<link rel="stylesheet" href="css/swiper-3.4.2.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		html,body{
+			height: 100%;
+		}
+		.swiper-container {
+            width: 540px;
+            height: 100%;
+            overflow: hidden;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            overflow: hidden;
+            Center slide text vertically 
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+		.section1{
+			width: 100%;
+			height: 100%;
+			background: red;
+		}
+		@keyframes biankuang{
+            0% {
+                top: -100%;
+                left: 5%;
+            }
+            100% {
+                top: 5%;
+                left: 5%;
+                bottom: 5%;
+                right: 5%;
+            }
+        }
+        .biankuang{
+            animation: biankuang 1s;
+        }
+		.box{
+			position: absolute;
+		    top: 5%;
+		    left: 5%;
+		    bottom: 5%;
+		    right: 5%;
+		    width: 90%;
+		    height: 90%;
+		    background: yellow;
+		    opacity: 0.5;
+		}
+
+		@media screen and (max-width:540px){
+		    .swiper-container {
+		        width:100%;
+		        height:100%;
+		    }
+		}
+
+	</style>
+</head>
+<body>
+	<!-- <div class="container">
+		<div class="box"></div>
+	</div> -->
+
+	<div class="swiper-container">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide section1">
+	        	<div class="box"></div>
+	        </div>
+	        <div class="swiper-slide">Slide 2</div>
+	        <div class="swiper-slide">Slide 3</div>
+	    </div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper-3.4.2.min.js"></script>
+<script type="text/javascript" src="js/swiper.animate1.0.3.min.js"></script>
+<script type="text/javascript">
+	// $(".box").addClass("biankuang").css("opacity",0.5);
+
+	var mySwiper = new Swiper ('.swiper-container', {
+	    direction: 'vertical', // 垂直切换选项
+	    //loop: true, // 循环模式选项
+	    
+	    // 如果需要分页器
+	    pagination:'.swiper-pagination',
+
+	    onInit: function(swiper){
+	        //Swiper初始化了
+	        //alert(swiper.activeIndex);提示Swiper的当前索引
+	        console.log("onInit"+swiper.activeIndex);
+	        $(".box").addClass("biankuang").css("opacity",0.5);
+	    },
+	    onSlideChangeEnd:function(swiper){ 
+	        console.log("onSlideChangeEnd"+swiper.activeIndex);
+	        switch(swiper.activeIndex){
+	            case 0:
+	            $(".box").stop(true,true).addClass("biankuang").css("opacity",0.5);
+	            break;
+	        }
+	    } ,
+	    onSlideChangeStart:function(swiper){ 
+	    	console.log(swiper.activeIndex)
+	        if(swiper.activeIndex != 0){
+	        	$(".box").stop(true,true).removeClass("biankuang").css("opacity",0);
+	        }
+	    }
+
+	 }) 
+</script>
+</html>
