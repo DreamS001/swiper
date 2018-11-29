@@ -87,16 +87,23 @@
 	<div class="swiper-container">
 	    <div class="swiper-wrapper">
 	        <div class="swiper-slide section1">
-	        	<div class="box"></div>
+	        	<div class="box ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s"></div>
 	        </div>
-	        <div class="swiper-slide">Slide 2</div>
-	        <div class="swiper-slide">Slide 3</div>
+	        <div class="swiper-slide">
+	        	<p class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">内容</p>
+	        	<div>
+	        		<p class="ani" swiper-anmate-effect="fadeInUp" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">自由</p>
+	        	</div>
+	        </div>
+	        <div class="swiper-slide">
+	        	<p class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">内容</p>
+	        </div>
 	    </div>
 	</div>
 </body>
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/swiper-3.4.2.min.js"></script>
-<script type="text/javascript" src="js/swiper.animate1.0.3.min.js"></script>
+<script type="text/javascript" src="js/swiper.animate.min.js"></script>
 <script type="text/javascript">
 	// $(".box").addClass("biankuang").css("opacity",0.5);
 
@@ -110,16 +117,23 @@
 	    onInit: function(swiper){
 	        //Swiper初始化了
 	        //alert(swiper.activeIndex);提示Swiper的当前索引
+	        //
+	        swiperAnimateCache(swiper); //隐藏动画元素 
+        	swiperAnimate(swiper); //初始化完成开始动画
 	        console.log("onInit"+swiper.activeIndex);
-	        $(".box").addClass("biankuang").css("opacity",0.5);
+	        // $(".box").addClass("biankuang").css("opacity",0.5);
+	        
 	    },
 	    onSlideChangeEnd:function(swiper){ 
 	        console.log("onSlideChangeEnd"+swiper.activeIndex);
+	        swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+        	//this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
 	        switch(swiper.activeIndex){
 	            case 0:
-	            $(".box").stop(true,true).addClass("biankuang").css("opacity",0.5);
+	            // $(".box").stop(true,true).addClass("biankuang").css("opacity",0.5);
 	            break;
 	        }
+	        
 	    } ,
 	    onSlideChangeStart:function(swiper){ 
 	    	console.log(swiper.activeIndex)
